@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskBrains - Профиль</title>
+    <link rel="icon" href="static/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <header class="bg-white border-bottom py-3 mb-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-3 mb-3 mb-md-0">
+                    <a href="index.html" class="text-decoration-none fs-3 fw-bold text-dark">AskBrains</a>
+                </div>
+
+                <div class="col-12 col-md-5 mb-3 mb-md-0">
+                    <form class="d-flex" action="index.html" method="GET">
+                        <div class="input-group me-3">
+                            <input class="form-control" type="search" name="q" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-secondary text-nowrap" type="submit">Найти</button>
+                        </div>
+
+                        <a href="ask.html" class="btn btn-outline-success text-nowrap">ASK!</a>
+                    </form>
+                </div>
+
+                <div class="col-12 col-md-4 d-flex justify-content-md-end align-items-center">
+<!--                    <div class="d-flex gap-2">-->
+<!--                        <a href="login.html" class="text-decoration-none">вход</a>-->
+<!--                        <a href="signup.html" class="text-decoration-none">регистрация</a>-->
+<!--                    </div>-->
+
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="static/img/avatar.jpeg" alt="Avatar" class="rounded" width="32" height="32">
+                        <div class="d-flex flex-column" style="line-height: 1.2;">
+                            <span class="fw-bold">Mr. Pelican</span>
+                            <div class="small">
+                                <a href="profile.html" class="text-decoration-none">настройки</a>
+                                <a href="#" class="text-decoration-none text-danger">выход</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container flex-grow-1">
+        <div class="row">
+            <div class="col-12 col-md-8 col-lg-9">
+                <h2 class="h3 mb-4">Настройки: Mr. Pelican</h2>
+                <form>
+                    <div class="mb-3 row">
+                        <label for="profLogin" class="col-sm-3 col-form-label">Login</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control border-dark" id="profLogin">
+                            <div class="invalid-feedback">Данный логин занят</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="profEmail" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control border-dark" id="profEmail">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="profNick" class="col-sm-3 col-form-label">Никнейм</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control border-dark" id="profNick">
+                            <div class="form-text">Максимум 50 символов</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4 row">
+                        <label class="col-sm-3 col-form-label">Загрузите аватар</label>
+                        <div class="col-sm-9">
+                            <div class="d-flex align-items-start gap-4">
+                                <img src="static/img/avatar.jpeg" alt="Avatar" class="border border-dark p-1" style="width: 100px; height: 100px; object-fit: cover;">
+                                <div class="flex-grow-1">
+                                    <input class="form-control border-dark" type="file" id="profAvatar">
+                                    <div class="form-text">JPG, PNG или GIF</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 offset-sm-3">
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-12 col-md-4 col-lg-3 mt-4 mt-md-0">
+                <div class="mb-4">
+                    <h3 class="h5 mb-3">Популярные теги</h3>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="#" class="text-decoration-none">perl</a>
+                        <a href="#" class="text-decoration-none text-success">python</a>
+                        <a href="#" class="text-decoration-none">ТехноПарк</a>
+                        <a href="#" class="text-decoration-none text-danger">MySQL</a>
+                        <a href="#" class="text-decoration-none">django</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="h5 mb-3">Топ пользователей</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none">Mr. Freeman</a></li>
+                        <li><a href="#" class="text-decoration-none">Dr. House</a></li>
+                        <li><a href="#" class="text-decoration-none">Bender</a></li>
+                        <li><a href="#" class="text-decoration-none">Queen Victoria</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light py-3 mt-5">
+        <div class="container text-center">
+            Пустой футер.
+        </div>
+    </footer>
+
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
