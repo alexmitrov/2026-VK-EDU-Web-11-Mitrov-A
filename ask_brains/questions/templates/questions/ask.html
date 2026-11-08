@@ -1,0 +1,27 @@
+{% extends 'questions/layout/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="col-12 col-md-9">
+    <h2 class="h3 mb-4">Новый вопрос</h2>
+    <form method="POST" action="{% url 'ask' %}">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="qTitle" class="form-label">Заголовок</label>
+            <input type="text" class="form-control border-dark" id="qTitle" name="title" placeholder="Придумайте название вопросу">
+            <div class="form-text">Максимум 150 символов</div>
+        </div>
+        <div class="mb-3">
+            <label for="qText" class="form-label">Текст</label>
+            <textarea class="form-control border-dark" id="qText" rows="6" name="text" placeholder="Расскажите о вашем вопросе"></textarea>
+            <div class="form-text">Опишите вопрос подробнее (до 3000 символов)</div>
+        </div>
+        <div class="mb-3">
+            <label for="qTags" class="form-label">Тэги</label>
+            <input type="text" class="form-control border-dark" id="qTags" name="tags" placeholder="Напишите тэги через запятую">
+        </div>
+        <button type="submit" class="btn btn-primary">ASK!</button>
+    </form>
+</div>
+{% endblock %}

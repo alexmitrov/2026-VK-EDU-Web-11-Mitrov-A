@@ -1,0 +1,56 @@
+{% extends 'core/layout/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 col-md-8 col-lg-9">
+        <h2 class="h3 mb-4">Настройки: {{ user.nickname }}</h2>
+
+        <form method="POST" action="{% url 'profile' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3 row">
+                <label for="profLogin" class="col-sm-3 col-form-label">Login</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control border-dark" id="profLogin" name="username" value="{{ user.username }}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="profEmail" class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control border-dark" id="profEmail" name="email" value="{{ user.email }}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="profNick" class="col-sm-3 col-form-label">Никнейм</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control border-dark" id="profNick" name="nickname" value="{{ user.nickname }}">
+                    <div class="form-text">Максимум 50 символов</div>
+                </div>
+            </div>
+
+            <div class="mb-4 row">
+                <label class="col-sm-3 col-form-label">Загрузите аватар</label>
+                <div class="col-sm-9">
+                    <div class="d-flex align-items-start gap-4">
+                        <img src="{% static user.avatar %}" alt="Avatar" class="border border-dark p-1" style="width: 100px; height: 100px; object-fit: cover;">
+                        <div class="flex-grow-1">
+                            <input class="form-control border-dark" type="file" id="profAvatar" name="avatar">
+                            <div class="form-text">JPG, PNG или GIF</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-9 offset-sm-3">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

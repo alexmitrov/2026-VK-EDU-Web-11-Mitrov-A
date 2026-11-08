@@ -1,0 +1,34 @@
+{% load static %}
+
+<div class="card mb-3 border-dark" id="question-{{ obj.id }}">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-3 col-md-2 text-center">
+                <img src="{% static 'questions/img/avatar.jpeg' %}" alt="Avatar" class="img-fluid border border-dark mb-2" style="max-width: 64px;">
+                <div class="d-flex align-items-center justify-content-center border border-dark rounded">
+                    <button class="btn btn-sm px-1 py-0">&uarr;</button>
+                    <span class="px-2 fw-bold">5</span>
+                    <button class="btn btn-sm px-1 py-0">&darr;</button>
+                </div>
+            </div>
+
+            <div class="col-9 col-md-10">
+                <h5 class="card-title">
+                    <a href="{% url 'question' question_id=obj.id %}" class="text-decoration-none text-primary text-truncate d-block" title="{{ obj.title }}">{{ obj.title }}</a>
+                </h5>
+                <p class="card-text text-muted small mb-2">{{ obj.text }}</p>
+                <div class="d-flex flex-wrap gap-3 small">
+                    <a href="{% url 'question' question_id=obj.id %}#answer-form" class="text-decoration-none">ответить ({{ obj.answers_count }})</a>
+                    <div>Тэги:
+                        {% for tag in obj.top_tags|slice:":3" %}
+                            <a href="{% url 'tag' tag_name=tag %}" class="badge bg-secondary text-decoration-none">{{ tag }}</a>
+                        {% endfor %}
+                        {% if obj.tags_count > 3 %}
+                            <span class="text-muted">+{{ obj.tags_count|add:"-3" }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

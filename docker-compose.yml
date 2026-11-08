@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ask_brains:/ask_brains
+      - media_volume:/ask_brains/media
+
+volumes:
+  media_volume:

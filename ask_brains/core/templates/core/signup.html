@@ -1,0 +1,47 @@
+{% extends 'core/layout/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+        <h2 class="h3 mb-4">Регистрация</h2>
+
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'signup' %}">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="regLogin" class="form-label">Логин</label>
+                <input type="text" class="form-control border-dark" id="regLogin" name="username" value="{{ username|default:'' }}" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="regEmail" class="form-label">Email</label>
+                <input type="email" class="form-control border-dark" id="regEmail" name="email" value="{{ email|default:'' }}" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="regNick" class="form-label">Никнейм</label>
+                <input type="text" class="form-control border-dark" id="regNick" name="nickname" value="{{ nickname|default:'' }}">
+            </div>
+            
+            <div class="mb-3">
+                <label for="regPass" class="form-label">Пароль</label>
+                <input type="password" class="form-control border-dark" id="regPass" name="password" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="regPassRep" class="form-label">Повторите пароль</label>
+                <input type="password" class="form-control border-dark" id="regPassRep" name="password_rep" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Зарегистрироваться!</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
