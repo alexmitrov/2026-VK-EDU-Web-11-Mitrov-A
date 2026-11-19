@@ -20,11 +20,11 @@
                 <div class="col-12 col-md-5 mb-3 mb-md-0">
                     <form class="d-flex" action="index.html" method="GET">
                         <div class="input-group me-3">
-                            <input class="form-control" type="search" name="q" placeholder="Search" aria-label="Search">
+                            <input class="form-control" type="search" name="q" placeholder="Поиск" aria-label="Поиск">
                             <button class="btn btn-outline-secondary text-nowrap" type="submit">Найти</button>
                         </div>
 
-                        <a href="ask.html" class="btn btn-outline-success text-nowrap">ASK!</a>
+                        <a href="ask.html" class="btn btn-outline-success text-nowrap">Задать вопрос</a>
                     </form>
                 </div>
 
@@ -33,61 +33,81 @@
                         <a href="login.html" class="text-decoration-none">вход</a>
                         <a href="signup.html" class="text-decoration-none">регистрация</a>
                     </div>
-
-<!--                    <div class="d-flex align-items-center gap-2">-->
-<!--                        <img src="static/img/avatar.jpeg" alt="Avatar" class="rounded" width="32" height="32">-->
-<!--                        <div class="d-flex flex-column" style="line-height: 1.2;">-->
-<!--                            <span class="fw-bold">Mr. Pelican</span>-->
-<!--                            <div class="small">-->
-<!--                                <a href="profile.html" class="text-decoration-none">настройки</a>-->
-<!--                                <a href="#" class="text-decoration-none text-danger">выход</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
                 </div>
             </div>
         </div>
     </header>
 
     <main class="container flex-grow-1">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6">
-                <h2 class="h3 mb-4">Регистрация</h2>
+        <div class="row">
+            <div class="col-12 col-md-8 col-lg-9">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-9 col-lg-8">
+                        <h1 class="h3 mb-4">Регистрация</h1>
 
-                <div class="alert alert-danger" role="alert">
-                    Аккаунт с данной почтой уже существует
+                        <div class="alert alert-danger" role="alert">
+                            Аккаунт с данной почтой уже существует
+                        </div>
+
+                        <form>
+                            <div class="mb-3">
+                                <label for="regLogin" class="form-label">Логин</label>
+                                <input type="text" class="form-control border-dark" id="regLogin" name="login" maxlength="50" placeholder="Введите свой логин">
+                                <div class="form-text">Используйте латиницу, цифры и символ подчёркивания. До 50 символов.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="regEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control border-dark is-invalid" id="regEmail" name="email" maxlength="100" placeholder="example@mail.com">
+                                <div class="invalid-feedback">
+                                    Некорректный email.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="regNick" class="form-label">Никнейм</label>
+                                <input type="text" class="form-control border-dark" id="regNick" name="nickname" maxlength="50" placeholder="Как вас показывать">
+                                <div class="form-text">Максимум 50 символов</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="regPass" class="form-label">Пароль</label>
+                                <input type="password" class="form-control border-dark" id="regPass" name="password" maxlength="100" placeholder="********">
+                                <div class="form-text">Не менее 8 символов, буквы и цифры.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="regPassRep" class="form-label">Повторите пароль</label>
+                                <input type="password" class="form-control border-dark" id="regPassRep" name="password_repeat" maxlength="100" placeholder="********">
+                            </div>
+                            <div class="mb-3">
+                                <label for="regAvatar" class="form-label">Загрузите аватар</label>
+                                <input class="form-control border-dark" type="file" id="regAvatar" name="avatar" accept="image/jpeg,image/png,image/gif">
+                                <div class="form-text">JPG, PNG или GIF. Не более 2 МБ.</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4 col-lg-3 mt-4 mt-md-0">
+                <div class="mb-4">
+                    <h2 class="h5 mb-3">Популярные теги</h2>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="index.html?tag=perl" class="text-decoration-none">perl</a>
+                        <a href="index.html?tag=python" class="text-decoration-none text-success">python</a>
+                        <a href="index.html?tag=technopark" class="text-decoration-none">ТехноПарк</a>
+                        <a href="index.html?tag=mysql" class="text-decoration-none text-danger">MySQL</a>
+                        <a href="index.html?tag=django" class="text-decoration-none">django</a>
+                    </div>
                 </div>
 
-                <form>
-                    <div class="mb-3">
-                        <label for="regLogin" class="form-label">Логин</label>
-                        <input type="text" class="form-control border-dark" id="regLogin">
-                    </div>
-                    <div class="mb-3">
-                        <label for="regEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control border-dark is-invalid" id="regEmail">
-                        <div class="invalid-feedback">
-                            Некорректный email.
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="regNick" class="form-label">Никнейм</label>
-                        <input type="text" class="form-control border-dark" id="regNick">
-                    </div>
-                    <div class="mb-3">
-                        <label for="regPass" class="form-label">Пароль</label>
-                        <input type="password" class="form-control border-dark" id="regPass">
-                    </div>
-                    <div class="mb-3">
-                        <label for="regPassRep" class="form-label">Повторите пароль</label>
-                        <input type="password" class="form-control border-dark" id="regPassRep">
-                    </div>
-                    <div class="mb-3">
-                        <label for="regAvatar" class="form-label">Загрузите аватар</label>
-                        <input class="form-control border-dark" type="file" id="regAvatar">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Зарегистрироваться!</button>
-                </form>
+                <div>
+                    <h2 class="h5 mb-3">Топ пользователей</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none">Mr. Freeman</a></li>
+                        <li><a href="#" class="text-decoration-none">Dr. House</a></li>
+                        <li><a href="#" class="text-decoration-none">Bender</a></li>
+                        <li><a href="#" class="text-decoration-none">Queen Victoria</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </main>

@@ -20,11 +20,11 @@
                 <div class="col-12 col-md-5 mb-3 mb-md-0">
                     <form class="d-flex" action="index.html" method="GET">
                         <div class="input-group me-3">
-                            <input class="form-control" type="search" name="q" placeholder="Search" aria-label="Search">
+                            <input class="form-control" type="search" name="q" placeholder="Поиск" aria-label="Поиск">
                             <button class="btn btn-outline-secondary text-nowrap" type="submit">Найти</button>
                         </div>
 
-                        <a href="ask.html" class="btn btn-outline-success text-nowrap">ASK!</a>
+                        <a href="ask.html" class="btn btn-outline-success text-nowrap">Задать вопрос</a>
                     </form>
                 </div>
 
@@ -33,17 +33,6 @@
                         <a href="login.html" class="text-decoration-none">вход</a>
                         <a href="signup.html" class="text-decoration-none">регистрация</a>
                     </div>
-
-<!--                    <div class="d-flex align-items-center gap-2">-->
-<!--                        <img src="static/img/avatar.jpeg" alt="Avatar" class="rounded" width="32" height="32">-->
-<!--                        <div class="d-flex flex-column" style="line-height: 1.2;">-->
-<!--                            <span class="fw-bold">Mr. Pelican</span>-->
-<!--                            <div class="small">-->
-<!--                                <a href="profile.html" class="text-decoration-none">настройки</a>-->
-<!--                                <a href="#" class="text-decoration-none text-danger">выход</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -52,24 +41,54 @@
     <main class="container flex-grow-1">
         <div class="row">
             <div class="col-12 col-md-9">
-                <h2 class="h3 mb-4">Новый вопрос</h2>
+                <h1 class="h3 mb-4">Новый вопрос</h1>
+
+                <div class="alert alert-danger" role="alert">
+                    Не удалось отправить вопрос. Проверьте правильность заполнения полей.
+                </div>
+
                 <form>
                     <div class="mb-3">
                         <label for="qTitle" class="form-label">Заголовок</label>
-                        <input type="text" class="form-control border-dark" id="qTitle" placeholder="Придумайте название вопросу">
+                        <input type="text" class="form-control border-dark is-invalid" id="qTitle" name="title" maxlength="150" placeholder="Придумайте название вопросу">
+                        <div class="invalid-feedback">Заголовок не может быть пустым.</div>
                         <div class="form-text">Максимум 150 символов</div>
                     </div>
                     <div class="mb-3">
                         <label for="qText" class="form-label">Текст</label>
-                        <textarea class="form-control border-dark" id="qText" rows="6" placeholder="Расскажите о вашем вопросе"></textarea>
+                        <textarea class="form-control border-dark" id="qText" name="text" rows="6" maxlength="3000" placeholder="Расскажите о вашем вопросе"></textarea>
                         <div class="form-text">Опишите вопрос подробнее (до 3000 символов)</div>
                     </div>
                     <div class="mb-3">
                         <label for="qTags" class="form-label">Тэги</label>
-                        <input type="text" class="form-control border-dark" id="qTags" placeholder="Напишите тэги">
+                        <input type="text" class="form-control border-dark" id="qTags" name="tags" maxlength="100" placeholder="Напишите тэги">
+                        <div class="form-text">Через запятую, например: python, django, mysql. Не более 3 тегов.</div>
                     </div>
-                    <button type="submit" class="btn btn-primary">ASK!</button>
+                    <button type="submit" class="btn btn-primary">Задать вопрос</button>
                 </form>
+            </div>
+
+            <div class="col-12 col-md-3 mt-4 mt-md-0">
+                <div class="mb-4">
+                    <h2 class="h5 mb-3">Популярные теги</h2>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="index.html?tag=perl" class="text-decoration-none">perl</a>
+                        <a href="index.html?tag=python" class="text-decoration-none text-success">python</a>
+                        <a href="index.html?tag=technopark" class="text-decoration-none">ТехноПарк</a>
+                        <a href="index.html?tag=mysql" class="text-decoration-none text-danger">MySQL</a>
+                        <a href="index.html?tag=django" class="text-decoration-none">django</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="h5 mb-3">Топ пользователей</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none">Mr. Freeman</a></li>
+                        <li><a href="#" class="text-decoration-none">Dr. House</a></li>
+                        <li><a href="#" class="text-decoration-none">Bender</a></li>
+                        <li><a href="#" class="text-decoration-none">Queen Victoria</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </main>
