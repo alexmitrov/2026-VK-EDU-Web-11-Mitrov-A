@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AskBrains</title>
+    <title>{% block title %}AskBrains{% endblock %}</title>
     <link rel="icon" href="{% static 'core/img/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
-<!--    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">-->
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
 </head>
 
 <body class="d-flex flex-column min-vh-100 bg-light">
@@ -20,13 +20,13 @@
                 </div>
 
                 <div class="col-12 col-md-5 mb-3 mb-md-0">
-                    <form class="d-flex" action="index.html" method="GET">
+                    <form class="d-flex" action="{% url 'index' %}" method="GET">
                         <div class="input-group me-3">
-                            <input class="form-control" type="search" name="q" placeholder="Search" aria-label="Search">
+                            <input class="form-control" type="search" name="q" placeholder="Поиск" aria-label="Поиск">
                             <button class="btn btn-outline-secondary text-nowrap" type="submit">Найти</button>
                         </div>
 
-                        <a href="{% url 'ask' %}" class="btn btn-outline-success text-nowrap">ASK!</a>
+                        <a href="{% url 'ask' %}" class="btn btn-outline-success text-nowrap">Задать вопрос</a>
                     </form>
                 </div>
 
@@ -42,7 +42,7 @@
                             <div class="d-flex flex-column" style="line-height: 1.2;">
                                 <span class="fw-bold">Mr. Pelican</span>
                                 <div class="small">
-                                    <a href="profile.html" class="text-decoration-none">настройки</a>
+                                    <a href="{% url 'profile' %}" class="text-decoration-none">настройки</a>
                                     <a href="#" class="text-decoration-none text-danger">выход</a>
                                 </div>
                             </div>
@@ -55,10 +55,7 @@
 
     <main class="container flex-grow-1">
         <div class="row">
-            {% block content %}
-
-            {% endblock %}
-
+            {% block content %}{% endblock %}
         </div>
     </main>
 

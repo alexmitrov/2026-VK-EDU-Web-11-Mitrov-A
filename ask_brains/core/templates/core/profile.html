@@ -1,44 +1,54 @@
 {% extends 'core/layout/base.html' %}
 {% load static %}
 
+{% block title %}AskBrains - Настройки профиля{% endblock %}
+
 {% block content %}
 <div class="row">
     <div class="col-12 col-md-8 col-lg-9">
-        <h2 class="h3 mb-4">Настройки: {{ user.nickname }}</h2>
+        <h1 class="h3 mb-4">Настройки: {{ user.nickname }}</h1>
+
+        {% if error %}
+            <div class="alert alert-danger" role="alert">{{ error }}</div>
+        {% endif %}
 
         <form method="POST" action="{% url 'profile' %}" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div class="mb-3 row">
-                <label for="profLogin" class="col-sm-3 col-form-label">Login</label>
+                <label for="profLogin" class="col-sm-3 col-form-label">Логин</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control border-dark" id="profLogin" name="username" value="{{ user.username }}">
+                    <input type="text" class="form-control border-dark {% if error %}is-invalid{% endif %}" id="profLogin" name="username" maxlength="50" value="{{ user.username }}">
+                    {% if error %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endif %}
+                    <div class="form-text">Используйте латиницу, цифры и символ подчёркивания. До 50 символов.</div>
                 </div>
             </div>
 
             <div class="mb-3 row">
                 <label for="profEmail" class="col-sm-3 col-form-label">Email</label>
                 <div class="col-sm-9">
-                    <input type="email" class="form-control border-dark" id="profEmail" name="email" value="{{ user.email }}">
+                    <input type="email" class="form-control border-dark" id="profEmail" name="email" maxlength="100" value="{{ user.email }}">
                 </div>
             </div>
 
             <div class="mb-3 row">
                 <label for="profNick" class="col-sm-3 col-form-label">Никнейм</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control border-dark" id="profNick" name="nickname" value="{{ user.nickname }}">
+                    <input type="text" class="form-control border-dark" id="profNick" name="nickname" maxlength="50" value="{{ user.nickname }}">
                     <div class="form-text">Максимум 50 символов</div>
                 </div>
             </div>
 
             <div class="mb-4 row">
-                <label class="col-sm-3 col-form-label">Загрузите аватар</label>
+                <label for="profAvatar" class="col-sm-3 col-form-label">Загрузите аватар</label>
                 <div class="col-sm-9">
                     <div class="d-flex align-items-start gap-4">
                         <img src="{% static user.avatar %}" alt="Avatar" class="border border-dark p-1" style="width: 100px; height: 100px; object-fit: cover;">
                         <div class="flex-grow-1">
-                            <input class="form-control border-dark" type="file" id="profAvatar" name="avatar">
-                            <div class="form-text">JPG, PNG или GIF</div>
+                            <input class="form-control border-dark" type="file" id="profAvatar" name="avatar" accept="image/jpeg,image/png,image/gif">
+                            <div class="form-text">JPG, PNG или GIF. Не более 2 МБ.</div>
                         </div>
                     </div>
                 </div>
@@ -51,6 +61,5 @@
             </div>
         </form>
     </div>
-
 </div>
 {% endblock %}

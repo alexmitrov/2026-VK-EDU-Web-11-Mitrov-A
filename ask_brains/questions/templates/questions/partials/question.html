@@ -3,20 +3,31 @@
 <div class="card mb-3 border-dark" id="question-{{ obj.id }}">
     <div class="card-body">
         <div class="row">
-            <div class="col-3 col-md-2 text-center">
+            <div class="col-4 col-md-3 col-lg-2 text-center">
                 <img src="{% static 'questions/img/avatar.jpeg' %}" alt="Avatar" class="img-fluid border border-dark mb-2" style="max-width: 64px;">
                 <div class="d-flex align-items-center justify-content-center border border-dark rounded">
-                    <button class="btn btn-sm px-1 py-0">&uarr;</button>
-                    <span class="px-2 fw-bold">5</span>
-                    <button class="btn btn-sm px-1 py-0">&darr;</button>
+                    {% if obj.vote == 'up' %}
+                        <button class="btn btn-sm px-1 py-0 btn-success text-white" type="button" aria-label="Нравится" aria-pressed="true">&uarr;</button>
+                        <span class="px-2 fw-bold text-success">{{ obj.rating }}</span>
+                        <button class="btn btn-sm px-1 py-0" type="button" aria-label="Не нравится">&darr;</button>
+                    {% elif obj.vote == 'down' %}
+                        <button class="btn btn-sm px-1 py-0" type="button" aria-label="Нравится">&uarr;</button>
+                        <span class="px-2 fw-bold text-danger">{{ obj.rating }}</span>
+                        <button class="btn btn-sm px-1 py-0 btn-danger text-white" type="button" aria-label="Не нравится" aria-pressed="true">&darr;</button>
+                    {% else %}
+                        <button class="btn btn-sm px-1 py-0" type="button" aria-label="Нравится">&uarr;</button>
+                        <span class="px-2 fw-bold">{{ obj.rating }}</span>
+                        <button class="btn btn-sm px-1 py-0" type="button" aria-label="Не нравится">&darr;</button>
+                    {% endif %}
                 </div>
             </div>
 
-            <div class="col-9 col-md-10">
-                <h5 class="card-title">
+            <div class="col-8 col-md-9 col-lg-10">
+                <h2 class="h5 card-title">
                     <a href="{% url 'question' question_id=obj.id %}" class="text-decoration-none text-primary text-truncate d-block" title="{{ obj.title }}">{{ obj.title }}</a>
-                </h5>
+                </h2>
                 <p class="card-text text-muted small mb-2">{{ obj.text }}</p>
+                <div class="small text-muted mb-2">{{ obj.created_at }}</div>
                 <div class="d-flex flex-wrap gap-3 small">
                     <a href="{% url 'question' question_id=obj.id %}#answer-form" class="text-decoration-none">ответить ({{ obj.answers_count }})</a>
                     <div>Тэги:

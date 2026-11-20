@@ -1,10 +1,12 @@
 {% extends 'core/layout/base.html' %}
 {% load static %}
 
+{% block title %}AskBrains - Регистрация{% endblock %}
+
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-12 col-md-8 col-lg-6">
-        <h2 class="h3 mb-4">Регистрация</h2>
+        <h1 class="h3 mb-4">Регистрация</h1>
 
         {% if error %}
             <div class="alert alert-danger" role="alert">
@@ -12,35 +14,47 @@
             </div>
         {% endif %}
 
-        <form method="POST" action="{% url 'signup' %}">
+        <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            
+
             <div class="mb-3">
                 <label for="regLogin" class="form-label">Логин</label>
-                <input type="text" class="form-control border-dark" id="regLogin" name="username" value="{{ username|default:'' }}" required>
+                <input type="text" class="form-control border-dark" id="regLogin" name="username" maxlength="50" value="{{ username|default:'' }}" placeholder="Введите свой логин" required>
+                <div class="form-text">Используйте латиницу, цифры и символ подчёркивания. До 50 символов.</div>
             </div>
-            
+
             <div class="mb-3">
                 <label for="regEmail" class="form-label">Email</label>
-                <input type="email" class="form-control border-dark" id="regEmail" name="email" value="{{ email|default:'' }}" required>
+                <input type="email" class="form-control border-dark {% if email_error %}is-invalid{% endif %}" id="regEmail" name="email" maxlength="100" value="{{ email|default:'' }}" placeholder="example@mail.com" required>
+                {% if email_error %}
+                    <div class="invalid-feedback">{{ email_error }}</div>
+                {% endif %}
             </div>
-            
+
             <div class="mb-3">
                 <label for="regNick" class="form-label">Никнейм</label>
-                <input type="text" class="form-control border-dark" id="regNick" name="nickname" value="{{ nickname|default:'' }}">
+                <input type="text" class="form-control border-dark" id="regNick" name="nickname" maxlength="50" value="{{ nickname|default:'' }}" placeholder="Как вас показывать">
+                <div class="form-text">Максимум 50 символов</div>
             </div>
-            
+
             <div class="mb-3">
                 <label for="regPass" class="form-label">Пароль</label>
-                <input type="password" class="form-control border-dark" id="regPass" name="password" required>
+                <input type="password" class="form-control border-dark" id="regPass" name="password" maxlength="100" placeholder="********" required>
+                <div class="form-text">Не менее 8 символов, буквы и цифры.</div>
             </div>
-            
+
             <div class="mb-3">
                 <label for="regPassRep" class="form-label">Повторите пароль</label>
-                <input type="password" class="form-control border-dark" id="regPassRep" name="password_rep" required>
+                <input type="password" class="form-control border-dark" id="regPassRep" name="password_rep" maxlength="100" placeholder="********" required>
             </div>
-            
-            <button type="submit" class="btn btn-primary">Зарегистрироваться!</button>
+
+            <div class="mb-3">
+                <label for="regAvatar" class="form-label">Загрузите аватар</label>
+                <input class="form-control border-dark" type="file" id="regAvatar" name="avatar" accept="image/jpeg,image/png,image/gif">
+                <div class="form-text">JPG, PNG или GIF. Не более 2 МБ.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
         </form>
     </div>
 </div>

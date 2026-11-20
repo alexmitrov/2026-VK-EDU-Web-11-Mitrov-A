@@ -1,22 +1,33 @@
 {% extends 'core/layout/base.html' %}
 {% load static %}
 
+{% block title %}AskBrains - Авторизация{% endblock %}
+
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-12 col-md-6 col-lg-5">
-        <h2 class="h3 mb-4">Авторизация</h2>
+        <h1 class="h3 mb-4">Авторизация</h1>
+
+        {% if error %}
+            <div class="alert alert-danger" role="alert">{{ error }}</div>
+        {% endif %}
 
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
 
             <div class="mb-3">
                 <label for="loginInput" class="form-label">Логин</label>
-                <input type="text" class="form-control border-dark" id="loginInput" name="username" placeholder="Введите свой логин" required>
+                <input type="text" class="form-control border-dark {% if error %}is-invalid{% endif %}" id="loginInput" name="username" maxlength="50" value="{{ username|default:'' }}" placeholder="Введите свой логин" required>
+                {% if error %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endif %}
+                <div class="form-text">Используйте латиницу, цифры и символ подчёркивания. До 50 символов.</div>
             </div>
 
             <div class="mb-3">
                 <label for="passwordInput" class="form-label">Пароль</label>
-                <input type="password" class="form-control border-dark" id="passwordInput" name="password" placeholder="********" required>
+                <input type="password" class="form-control border-dark" id="passwordInput" name="password" maxlength="100" placeholder="********" required>
+                <div class="form-text">Не менее 8 символов.</div>
             </div>
 
             <button type="submit" class="btn btn-primary mb-3">Войти</button>
