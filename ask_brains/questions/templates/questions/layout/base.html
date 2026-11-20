@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskBrains</title>
+    <link rel="icon" href="{% static 'questions/img/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'questions/css/bootstrap.min.css' %}">
+</head>
+
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <header class="bg-white border-bottom py-3 mb-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-3 mb-3 mb-md-0">
+                    <a href="{% url 'index' %}" class="text-decoration-none fs-3 fw-bold text-dark">AskBrains</a>
+                </div>
+
+                <div class="col-12 col-md-5 mb-3 mb-md-0">
+                    <form class="d-flex" action="{% url 'index' %}" method="GET">
+                        <div class="input-group me-3">
+                            <input class="form-control" type="search" name="q" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-secondary text-nowrap" type="submit">Найти</button>
+                        </div>
+
+                        <a href="{% url 'ask' %}" class="btn btn-outline-success text-nowrap">Задать вопрос!</a>
+                    </form>
+                </div>
+
+                <div class="col-12 col-md-4 d-flex justify-content-md-end align-items-center">
+                    {% if not user.is_authenticated %}
+                        <div class="d-flex gap-2">
+                            <a href="{% url 'login' %}" class="text-decoration-none">вход</a>
+                            <a href="{% url 'signup' %}" class="text-decoration-none">регистрация</a>
+                        </div>
+                    {% else %}
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="{% static 'questions/img/avatar.jpeg' %}" alt="Avatar" class="rounded" width="32" height="32">
+                            <div class="d-flex flex-column" style="line-height: 1.2;">
+                                <span class="fw-bold">Mr. Pelican</span>
+                                <div class="small">
+                                    <a href="{% url 'profile' %}" class="text-decoration-none">настройки</a>
+                                    <a href="#" class="text-decoration-none text-danger">выход</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container flex-grow-1">
+        <div class="row">
+            {% block content %}
+
+            {% endblock %}
+
+            <div class="col-12 col-md-4 col-lg-3 mt-4 mt-md-0">
+                <div class="mb-4">
+                    <h3 class="h5 mb-3">Популярные теги</h3>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="{% url 'tag' tag_name='perl' %}" class="text-decoration-none">perl</a>
+                        <a href="{% url 'tag' tag_name='python' %}" class="text-decoration-none text-success">python</a>
+                        <a href="{% url 'tag' tag_name='TechnoPark' %}" class="text-decoration-none">TechnoPark</a>
+                        <a href="{% url 'tag' tag_name='MySQL' %}" class="text-decoration-none text-danger">MySQL</a>
+                        <a href="{% url 'tag' tag_name='django' %}" class="text-decoration-none">django</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="h5 mb-3">Топ пользователей</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none">Mr. Freeman</a></li>
+                        <li><a href="#" class="text-decoration-none">Dr. House</a></li>
+                        <li><a href="#" class="text-decoration-none">Bender</a></li>
+                        <li><a href="#" class="text-decoration-none">Queen Victoria</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light py-3 mt-5">
+        <div class="container text-center">
+            Пустой футер
+        </div>
+    </footer>
+
+    <script src="{% static 'questions/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

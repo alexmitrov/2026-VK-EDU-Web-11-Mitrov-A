@@ -1,0 +1,97 @@
+{% extends 'questions/layout/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="col-12 col-md-8 col-lg-9">
+    <div class="card mb-4 border-dark">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4 col-md-3 col-lg-2 text-center">
+                    <img src="{% static 'core/img/avatar.jpeg' %}" class="img-fluid border mb-2" alt="avatar">
+                    <div class="d-flex align-items-center justify-content-center border rounded">
+                        <button class="btn btn-sm px-1 py-0 btn-success text-white" type="button" aria-label="Нравится" aria-pressed="true">&uarr;</button>
+                        <span class="px-2 text-success fw-bold">6</span>
+                        <button class="btn btn-sm px-1 py-0" type="button" aria-label="Не нравится">&darr;</button>
+                    </div>
+                </div>
+                <div class="col-8 col-md-9 col-lg-10">
+                    <h1 class="h4">{{ question.title }}</h1>
+                    <p>{{ question.text }}</p>
+                    <div class="small text-muted mb-2">
+                        <span>{{ question.created_at }}</span>
+                        <span class="ms-3">Ответов: {{ answers|length }}</span>
+                    </div>
+                    <div class="small">
+                        Тэги:
+                        {% for tag in question.top_tags %}
+                            <a href="{% url 'tag' tag_name=tag %}" class="text-decoration-none">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="answers">
+    {% for answer in answers %}
+        <div class="card mb-3 border-dark">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4 col-md-3 col-lg-2 text-center">
+                        <img src="{% static 'core/img/avatar.jpeg' %}" class="img-fluid border mb-2" alt="avatar">
+                        <div class="d-flex align-items-center justify-content-center border rounded mb-2">
+                            {% if forloop.first %}
+                                <button class="btn btn-sm px-1 py-0 btn-success text-white" type="button" aria-label="Нравится" aria-pressed="true">&uarr;</button>
+                                <span class="px-2 text-success fw-bold">{{ answer.likes }}</span>
+                                <button class="btn btn-sm px-1 py-0" type="button" aria-label="Не нравится">&darr;</button>
+                            {% elif forloop.last %}
+                                <button class="btn btn-sm px-1 py-0" type="button" aria-label="Нравится">&uarr;</button>
+                                <span class="px-2 text-danger fw-bold">{{ answer.likes }}</span>
+                                <button class="btn btn-sm px-1 py-0 btn-danger text-white" type="button" aria-label="Не нравится" aria-pressed="true">&darr;</button>
+                            {% else %}
+                                <button class="btn btn-sm px-1 py-0" type="button" aria-label="Нравится">&uarr;</button>
+                                <span class="px-2 fw-bold">{{ answer.likes }}</span>
+                                <button class="btn btn-sm px-1 py-0" type="button" aria-label="Не нравится">&darr;</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-8 col-md-9 col-lg-10">
+                        <p>{{ answer.text }}</p>
+                        <div class="small text-muted mb-2">{{ answer.created_at }}</div>
+                        <div class="form-check mt-3">
+                            {% if answer.is_correct %}
+                                <input class="form-check-input" type="checkbox" value="" id="correctCheck{{ answer.id }}" checked>
+                                <label class="form-check-label text-success fw-bold" for="correctCheck{{ answer.id }}">
+                                    Верно!
+                                </label>
+                            {% else %}
+                                <input class="form-check-input" type="checkbox" value="" id="correctCheck{{ answer.id }}">
+                                <label class="form-check-label" for="correctCheck{{ answer.id }}">
+                                    Верно!
+                                </label>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-muted">Ответов пока нет.</p>
+    {% endfor %}
+    </div>
+
+    <nav aria-label="Answers pagination">
+        <ul class="pagination">
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+        </ul>
+    </nav>
+
+    <form id="answer-form" class="mt-4 mb-5" method="POST" action="{% url 'question' question.id %}">
+        {% csrf_token %}
+        <label for="answerText" class="form-label">Ваш ответ</label>
+        <textarea class="form-control mb-3 border-dark" id="answerText" name="text" rows="4" placeholder="Введите свой ответ"></textarea>
+        <button class="btn btn-primary" type="submit">Ответить</button>
+    </form>
+</div>
+{% endblock %}
